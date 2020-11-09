@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>
+		<ui:insert name="pageTitle">JSF Response Page</ui:insert>	
+	</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="/layouts/commonLayout.xhtml"> 
+		<ui:define name="title"> JSF Response Pgae</ui:define>
+		<ui:define name="content">
+		<!-- Welcome label, Order Data Grid, and Navigation Back to Login -->
+			<div align = "center">
+		
+			<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+				<p>My name is #{user.firstName} #{user.lastName}</p>
+				
+				<h3>Your Orders Are:</h3>
+				
+				<h:dataTable value="#{formController.service.orders}" var="o" styleClass="order-table" 
+							headerClass="order-table-header" rowClasses="order-table-odd, 
+							order-table-even">
+					<h:column>
+						<f:facet name="header">Order Number</f:facet>
+						#{o.orderNo}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Product Name</f:facet>
+						#{o.productName}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Price</f:facet>
+						#{o.price}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Quantity</f:facet>
+						#{o.quantity}
+					</h:column>
+				</h:dataTable>
+				<br></br>
+				
+				<h:form>
+					<h:commandButton value ="Send Order" action="#{formController.onSendOrder()}"/><br/>
+					<h:commandButton action="#{formController.onLogOff()}" value="Log Out"/>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
